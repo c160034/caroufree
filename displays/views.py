@@ -3,11 +3,11 @@ from django.http import Http404, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
 
 def starting_page(request):
+    return render(request, "displays/index.html")
+
+def listings(request):
     pass
 
-def posts(request):
-    pass
-
-def post_detail(request):
+def listing_detail(request):
     pass
 
