@@ -1,7 +1,12 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}
     Caroufree
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "displays/index.css"%}">
 {% endblock %}
 
 {% block content %}
@@ -11,12 +16,13 @@
             <a href="">All Listings</a>
         </nav>
     </header>
+
     <section id="welcome">
         <header>
             <img src="" alt="Caroufree" />
             <h2></h2>
         </header>
-        <p>A place to declutter in Singapore. Bless your reusables as we care for the Earth!</p>
+        <p>A place to declutter in Singapore. Give away your reusables as we care for the Earth!</p>
     </section>
 
     <section id="latest-listings">
@@ -45,5 +51,5 @@
             Our goal is to create opportunities for people to be a part of preserving and conserving the environment, because we believe there is so much that we can contribute to our Mother Nature!
         </p>
     </section>
-
+     
 {% endblock %} 
