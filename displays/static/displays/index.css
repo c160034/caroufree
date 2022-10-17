@@ -15,7 +15,7 @@
 }
 
 #latest-listings {
-    background-color: rgb(40, 40, 40);
+    background-color: rgb(197, 228, 119);
     padding: 2rem;
     border-radius: 12px;
     margin: -6rem auto 0rem auto;
@@ -24,7 +24,7 @@
 
 #latest-listings h2 {
     text-align: center;
-    color: white;
+    color: black;
 }
 
 #latest-listings ul {

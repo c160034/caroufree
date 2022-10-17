@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Listing Title
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "displays/listing-detail.css"%}">
+{% endblock %}
+
+{% block content %}
+    <section id="details">
+        <img src="https://www.prada.com/content/dam/pradabkg_products/1/1BA/1BA896/NZVF0236/1BA896_NZV_F0236_V_OOO_SLB.jpg" alt="Listing Image" />
+        <article>
+            <h2>Listing Title</h2>
+            <address>By Author1</address>
+            <div>
+                Posted on <time>October 17th</time>
+            </div>
+        </article>
+    </section>
+    <main>
+        <h3>Description</h3>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Id et necessitatibus vitae recusandae, mollitia dicta quam accusantium nisi quod, qui, incidunt aspernatur quisquam neque repellat quibusdam iusto officia illum sit.
+        </p>
+    </main>
+{% endblock %} 
