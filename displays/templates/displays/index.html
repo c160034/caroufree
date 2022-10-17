@@ -6,17 +6,11 @@
 {% endblock %}
 
 {% block css_files %}
+    <link rel="stylesheet" href="{% static "displays/partials/listing.css"%}">
     <link rel="stylesheet" href="{% static "displays/index.css"%}">
 {% endblock %}
 
 {% block content %}
-    <header id="main-navigation">
-        <img src="https://storage.googleapis.com/carousell-wordpress-files/1/2019/09/Carousell-logo-square.png" alt="Caroufree logo" id="logo"/>
-        <h1><a href="">Caroufree</a></h1>
-        <nav>
-            <a href="">All Listings</a>
-        </nav>
-    </header>
 
     <section id="welcome">
         <p>A place to declutter in Singapore. Give away your reusables as we care for the Earth!</p>
@@ -25,17 +19,9 @@
     <section id="latest-listings">
         <h2>Latest Listings</h2>
         <ul>
-            <li>
-                <article class="listing">
-                    <a href="">
-                        <img src="" alt="" />
-                        <div class="listing__content">
-                            <h3>Name</h3>
-                            <p>Description</p>
-                        </div>
-                    </a>
-                </article>
-            </li>
+            {% include "displays/partials/listing.html" %}
+            {% include "displays/partials/listing.html" %}
+            {% include "displays/partials/listing.html" %}
         </ul>
     </section>
     

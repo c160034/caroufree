@@ -6,8 +6,7 @@ def starting_page(request):
     return render(request, "displays/index.html")
 
 def listings(request):
-    pass
+    return render(request, "displays/all-listings.html")
 
 def listing_detail(request):
     pass
-
