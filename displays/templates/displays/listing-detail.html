@@ -11,19 +11,18 @@
 
 {% block content %}
     <section id="details">
-        <img src="https://www.prada.com/content/dam/pradabkg_products/1/1BA/1BA896/NZVF0236/1BA896_NZV_F0236_V_OOO_SLB.jpg" alt="Listing Image" />
+        <img src="https://www.prada.com/content/dam/pradabkg_products/1/1BA/1BA896/NZVF0236/1BA896_NZV_F0236_V_OOO_SLB.jpg" alt="{{ listing.image_name }}" />
         <article>
-            <h2>Listing Title</h2>
-            <address>By Author1</address>
+            <h2>{{ listing.title }}</h2>
+            <address>By <a href="mailto:{{ listing.author.email_address }}">{{ listing.author.username }}</a></address>
             <div>
-                Posted on <time>October 17th</time>
+                Posted on <time>{{ listing.date }}</time>
             </div>
         </article>
     </section>
     <main>
         <h3>Description</h3>
         <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Id et necessitatibus vitae recusandae, mollitia dicta quam accusantium nisi quod, qui, incidunt aspernatur quisquam neque repellat quibusdam iusto officia illum sit.
-        </p>
+            {{ listing.description }}
     </main>
 {% endblock %} 

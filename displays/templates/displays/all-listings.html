@@ -15,11 +15,9 @@
     <h2>All Listings</h2>
 
     <ul>
-        {% include "displays/partials/listing.html" %}
-        {% include "displays/partials/listing.html" %}
-        {% include "displays/partials/listing.html" %}
-        {% include "displays/partials/listing.html" %}
-        {% include "displays/partials/listing.html" %}
+        {% for listing in listings %}
+            {% include "displays/partials/listing.html" %}
+        {% endfor %}
     </ul>
 </section>
 {% endblock %} 

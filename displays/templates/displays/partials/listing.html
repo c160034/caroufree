@@ -2,11 +2,13 @@
 
 <li>
     <article class="listing">
-        <a href="{% url "listing-detail-page" "slug-123" %}">
-            <img src="https://www.prada.com/content/dam/pradabkg_products/1/1BA/1BA896/NZVF0236/1BA896_NZV_F0236_V_OOO_SLB.jpg" alt="listing image" />
+        <a href="{% url "listing-detail-page" listing.slug %}">
+            <img src="https://www.prada.com/content/dam/pradabkg_products/1/1BA/1BA896/NZVF0236/1BA896_NZV_F0236_V_OOO_SLB.jpg" alt="{{ listing.image_name }}" />
             <div class="listing__content">
-                <h3>Name</h3>
-                <p>Description</p>
+                <h3>{{ listing.title }}</h3>
+                <p>
+                    Posted on {{ listing.date }}
+                </p>
             </div>
         </a>
     </article>
