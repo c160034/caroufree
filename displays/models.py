@@ -11,7 +11,7 @@ class Author(models.Model):
 
 class Listing(models.Model):
     title = models.CharField(max_length=100)
-    image_name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to="listings", null=True)
     date = models.DateField(auto_now_add=True)
     slug = models.SlugField(unique=True)
     description = models.TextField(blank=True, max_length=250)
