@@ -1,7 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView
 
 from .models import Listing
+from .forms import ListingForm
 
 class StartingPageView(ListView):
     template_name = "displays/index.html"
@@ -41,3 +43,9 @@ class SingleListingView(DetailView):
 #     return render(request, "displays/listing-detail.html", {
 #         "listing": identified_listing
 #     })
+
+class NewListingView(CreateView):
+    model = Listing
+    form_class = ListingForm
+    template_name = "displays/new-listing.html"
+    success_url = "/displays"
