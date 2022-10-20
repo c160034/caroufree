@@ -3,8 +3,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path("", views.starting_page, name="starting-page"),
-    path("listings", views.listings, name="listings-page"),
-    path("listings/<slug:slug>", views.listing_detail,
+    path("", views.StartingPageView.as_view(), name="starting-page"),
+    path("listings", views.AllListingsView.as_view(), name="listings-page"),
+    path("listings/<slug:slug>", views.SingleListingView.as_view(),
          name="listing-detail-page")
 ]
