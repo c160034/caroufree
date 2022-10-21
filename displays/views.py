@@ -1,6 +1,9 @@
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic import ListView, DetailView, View
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from django.template.defaultfilters import slugify
+import datetime
 
 from .models import Listing
 from .forms import ListingForm
@@ -44,8 +47,26 @@ class SingleListingView(DetailView):
 #         "listing": identified_listing
 #     })
 
-class NewListingView(CreateView):
-    model = Listing
-    form_class = ListingForm
-    template_name = "displays/new-listing.html"
-    success_url = "/displays"
+# class NewListingView(CreateView):
+#     model = Listing
+#     form_class = ListingForm
+#     template_name = "displays/new-listing.html"
+#     success_url = "/displays"
+
+class NewListingView(View):
+    def get(self, request):
+        form = ListingForm()
+        return render(request, "displays/new-listing.html", {'form': form})
+
+    def post(self, request):
+        form = ListingForm(request.POST, request.FILES)
+        title = request.POST.get('title')
+        strtime = "".join(str(datetime.datetime.now()).split("."))
+        string = "%s-%s" % (title,strtime[7:])
+        slug = slugify(string)
+        if form.is_valid():
+            listing = form.save(commit=False)
+            listing.slug = slug
+            listing.save()
+            return HttpResponseRedirect(reverse("listing-detail-page", args=[slug]))
+        return render(request, "displays/new-listing.html", {'form': form})

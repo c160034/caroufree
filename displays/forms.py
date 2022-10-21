@@ -1,4 +1,3 @@
-from socket import fromshare
 from django import forms
 from .models import Listing
 
@@ -6,11 +5,11 @@ class ListingForm(forms.ModelForm):
     class Meta:
         model = Listing
         # fields = "__all__"
-        exclude = ["date", "slug", "user"]
+        exclude = ["slug"]
         labels = {
             "title" : "Title",
             "description" : "Description",
-            "image" : "Image"
+            "image" : "Image",
         }
         error_messages = {
             "title" : {
