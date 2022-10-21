@@ -7,7 +7,7 @@ body {
     box-shadow: 0 2px 8px rgba(243, 88, 88, 0.25);
 }
 
-#listing-form {
+#form {
     margin: 6rem auto 2rem auto;
     width: 90%;
     max-width: 40rem;
@@ -17,7 +17,7 @@ body {
     padding: 1rem;
 }
 
-#listing-form button {
+#form button {
     font: inherit;
     background-color: rgb(173, 0, 0);
     color: white;
@@ -27,8 +27,8 @@ body {
     cursor: pointer;
 }
 
-#listing-form button:hover,
-#listing-form button:active {
+#form button:hover,
+#form button:active {
     background-color: rgb(200, 0, 0);
     border-color: rgb(200, 0, 0);
 }
@@ -77,4 +77,10 @@ body {
     padding: 1rem;
     width: 90%;
     max-width: 40rem;
+}
+
+#info {
+    border: 1px solid rgb(223, 223, 223);
+    background-color: rgb(240, 237, 237);
+    padding: 0.5rem;
 }

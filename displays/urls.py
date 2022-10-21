@@ -3,6 +3,9 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path("register/", views.register, name="register-page"),
+    path("login/", views.loginPage, name="login-page"),
+    path("logout/", views.logoutUser, name="logout-page"),
     path("", views.StartingPageView.as_view(), name="starting-page"),
     path("listings", views.AllListingsView.as_view(), name="listings-page"),
     path("listings/new", views.NewListingView.as_view(), name="new-listing-page"),

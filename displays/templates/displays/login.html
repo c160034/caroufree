@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "displays/forms.css"%}">
+{% endblock %}
+
+{% block content %}
+    {% if form.errors %}
+        <div id="alert">
+            <h2>Fail to login</h2>
+            <p>Login credentials are incorrect.</p>
+        </div>
+    {% endif %}
+    <section id="form">
+        <h2>Login</h2>
+        <form action="" method="POST">
+            {% csrf_token %}
+                <div class="form-control {% if form_field.errors %}invalid{%endif%}"">
+                    <input type="text" name="username" placeholder="Username..."> 
+                </div>
+                <div class="form-control {% if form_field.errors %}invalid{%endif%}"">
+                    <input type="password" name="password" placeholder="Password..."> 
+                </div>
+            <button>Login</button>
+        </form>
+        {% for message in messages %}
+            <p id="info">{{message}}</p>
+        {% endfor %}
+        <p>Don't have an account? <a href="/register">Register</a></p>
+    </section>
+{% endblock %} 

@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    New Listing
+    Register
 {% endblock %}
 
 {% block css_files %}
@@ -12,13 +12,13 @@
 {% block content %}
     {% if form.errors %}
         <div id="alert">
-            <h2>Fail to post listing</h2>
+            <h2>Fail to register</h2>
             <p>Please check the form and update accordingly.</p>
         </div>
     {% endif %}
     <section id="form">
-        <h2>New Listing</h2>
-        <form action="{% url "new-listing-page" %}" method="POST" enctype="multipart/form-data">
+        <h2>Register</h2>
+        <form action="" method="POST">
             {% csrf_token %}
             {% for form_field in form %}
                 <div class="form-control {% if form_field.errors %}invalid{%endif%}"">
@@ -27,8 +27,8 @@
                     {{ form_field.errors }}
                 </div>
             {% endfor %}
-            <button>Post Listing</button>
+            <button>Register</button>
         </form>
+        <p>Already have an account? <a href="/login">Login</a></p>
     </section>
 {% endblock %} 
-
