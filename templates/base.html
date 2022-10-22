@@ -12,7 +12,7 @@
 </head>
 <body>
     <header id="main-navigation">
-        <img src="https://storage.googleapis.com/carousell-wordpress-files/1/2019/09/Carousell-logo-square.png" alt="Caroufree logo" id="logo"/>
+        <a href="{% url "starting-page" %}"><img src="https://storage.googleapis.com/carousell-wordpress-files/1/2019/09/Carousell-logo-square.png" alt="Caroufree logo" id="logo"/></a>
         <h1><a href="{% url "starting-page" %}">Caroufree</a></h1>
         <nav>
             {% if request.user.is_authenticated %}

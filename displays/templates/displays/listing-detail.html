@@ -10,6 +10,8 @@
 {% endblock %}
 
 {% block content %}
+<div>
+    <div id="back"><a href="{% url "listings-page" %}">Back to all listings</a></div>
     <section id="details">
         <img src="{{ listing.image.url }}" alt="{{ listing.title }}" />
         <article>
@@ -30,4 +32,5 @@
             {{ listing.description }}
         </p>
     </main>
+</div>
 {% endblock %} 
