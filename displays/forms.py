@@ -7,7 +7,7 @@ class ListingForm(forms.ModelForm):
     class Meta:
         model = Listing
         # fields = "__all__"
-        exclude = ["slug"]
+        exclude = ["slug", "author"]
         labels = {
             "title" : "Title",
             "description" : "Description",

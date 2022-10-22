@@ -45,9 +45,9 @@ class NewListingView(View):
         string = "%s-%s" % (title,strtime[7:])
         slug = slugify(string)
         if form.is_valid():
-            listing = form.save(commit=False)
-            listing.slug = slug
-            listing.save()
+            form.instance.author = request.user
+            form.instance.slug=slug
+            form.save()
             return HttpResponseRedirect(reverse("listing-detail-page", args=[slug]))
         return render(request, "displays/new-listing.html", {'form': form})
 
