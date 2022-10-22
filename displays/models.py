@@ -1,15 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 # from django.utils import timezone
 
 # Create your models here.
-
-# class Author(models.Model):
-#     username = models.CharField(max_length=50)
-#     email_address = models.EmailField()
-
-#     def __str__(self) -> str:
-#         return self.username
 
 class Listing(models.Model):
     title = models.CharField(max_length=100)
@@ -19,6 +13,9 @@ class Listing(models.Model):
     description = models.TextField(blank=True, max_length=250)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="listings")
 
+    def get_absolute_url(self):
+        return reverse("listing-detail-page", kwargs={"slug": self.slug})
+    
 # class Thread(models.Model):
 #     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
 #     receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")

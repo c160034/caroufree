@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import ListView, DetailView, View
+from django.views.generic import ListView, DetailView, View, UpdateView, CreateView
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.template.defaultfilters import slugify
@@ -32,7 +32,6 @@ class SingleListingView(DetailView):
     template_name = "displays/listing-detail.html"
     model = Listing
 
-
 class NewListingView(View):
     def get(self, request):
         form = ListingForm()
@@ -50,6 +49,11 @@ class NewListingView(View):
             form.save()
             return HttpResponseRedirect(reverse("listing-detail-page", args=[slug]))
         return render(request, "displays/new-listing.html", {'form': form})
+
+class UpdateListingView(UpdateView):
+    model = Listing
+    fields = ['title', 'image', 'description']
+    template_name = "displays/edit.html"
 
 def register(request):
     if request.user.is_authenticated:
@@ -86,3 +90,5 @@ def loginPage(request):
 def logoutUser(request):
     logout(request)
     return redirect('/login/')
+
+    

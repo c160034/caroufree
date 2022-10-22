@@ -18,11 +18,15 @@
             <div>
                 Posted on <time>{{ listing.date }}</time>
             </div>
+            {% if request.user == listing.author %}
+                <small><a href="{% url 'edit-listing-page' listing.slug %}">Edit</a></small>
+            {% endif %}
         </article>
     </section>
     <main>
         <h3>Description</h3>
         <p>
             {{ listing.description }}
+        </p>
     </main>
 {% endblock %} 
