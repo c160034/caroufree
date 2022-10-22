@@ -27,7 +27,8 @@
                     {{ form_field.errors }}
                 </div>
             {% endfor %}
-            <button>Update</button>
+            <button>Save Changes</button>
         </form>
+        <small><a href="{% url 'listing-detail-page' listing.slug %}">Cancel</a></small>
     </section>
 {% endblock %}
