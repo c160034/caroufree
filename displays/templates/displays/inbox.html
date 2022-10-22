@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Inbox
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "displays/thread.css"%}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 p-5">
+                <h3>Your Conversations</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 p-5">
+                <form method="GET" action="{% url 'create-thread-page' %}">
+                    <button class="btn btn-light p-3" type="submit">Start a Conversation</button>
+                </form>
+            </div>
+        </div>
+        {% for thread in threads %}
+        <div class="row mb-3">
+            <div class="card col-md-12 p-5 shadow-sm">
+                <a class="stretch-link" href="{% url 'thread-page' thread.pk %}"><h5>{{ thread.user }} - {{ thread.receiver }}</h5></a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %} 
+

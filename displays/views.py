@@ -6,9 +6,11 @@ from django.template.defaultfilters import slugify
 import datetime
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.db.models import Q
+from django.contrib.auth.models import User
 
-from .models import Listing
-from .forms import ListingForm, CreateUserForm
+from .models import Listing, Thread, Message
+from .forms import ListingForm, CreateUserForm, ThreadForm, MessageForm
 
 
 class StartingPageView(ListView):
@@ -96,4 +98,70 @@ def logoutUser(request):
     logout(request)
     return redirect('/login/')
 
+class ListThreads(View):
+    def get(self, request, *args, **kwargs):
+        threads = Thread.objects.filter(Q(user=request.user) | Q(receiver=request.user))
+        context = {
+            'threads': threads
+        }
+        return render(request, 'displays/inbox.html', context)
     
+class CreateThread(View):
+    def get(self, request, *args, **kwargs):
+        form = ThreadForm()
+        context = {
+            'form': form
+        }
+        return render(request, 'displays/create-thread.html', context)
+
+    def post(self, request, *args, **kwargs):
+        form = ThreadForm(request.POST)
+        username = request.POST.get('username')
+        try:
+            receiver = User.objects.get(username=username)
+            if Thread.objects.filter(user=request.user, receiver=receiver).exists():
+                thread =  Thread.objects.filter(user=request.user, receiver=receiver)[0]
+                return redirect('thread-page', pk=thread.pk)
+            elif Thread.objects.filter(user=receiver, receiver=request.user).exists():
+                thread =  Thread.objects.filter(user=receiver, receiver=request.user)[0]
+                return redirect('thread-page', pk=thread.pk)  
+            if form.is_valid():
+                thread = Thread(
+                    user=request.user,
+                    receiver=receiver
+                )
+                thread.save()
+                return redirect('thread-page', pk=thread.pk)
+        # except Exception as e:
+            # print(e)
+        except:
+            return redirect('create-thread-page')
+
+class ThreadView(View):
+    def get(self, request, pk, *args, **kwargs):
+        form = MessageForm()
+        thread = Thread.objects.get(pk=pk)
+        messages = Message.objects.filter(thread__pk__contains=pk)
+        context = {
+            'thread': thread,
+            'form': form,
+            'messages': messages
+        }
+        return render(request, 'displays/thread.html', context)
+
+class CreateMessage(View):
+    def post(self, request, pk, *args, **kwargs):
+        thread = Thread.objects.get(pk=pk)
+        if thread.receiver == request.user:
+            receiver = thread.user
+        else:
+            receiver = thread.receiver
+        
+        message = Message(
+            thread = thread,
+            sender = request.user,
+            receiver = receiver,
+            body = request.POST.get('message')
+        ) 
+        message.save()
+        return redirect('thread-page', pk=pk)

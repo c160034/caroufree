@@ -16,7 +16,7 @@
         <img src="{{ listing.image.url }}" alt="{{ listing.title }}" />
         <article>
             <h2>{{ listing.title }}</h2>
-            <address>By <a href="mailto:{{ listing.author.email }}">{{ listing.author.username }}</a></address>
+            <address>By <a href="{% url 'create-thread-page' %}">{{ listing.author.username }}</a></address>
             <div>
                 Posted on <time>{{ listing.date }}</time>
             </div>

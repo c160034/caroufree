@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Listing
+from .models import Listing, Thread
 
 # Register your models here.
 
@@ -10,3 +10,4 @@ class ListingAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
 
 admin.site.register(Listing, ListingAdmin)
+admin.site.register(Thread)

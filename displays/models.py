@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
-# from django.utils import timezone
+from django.utils import timezone
 
 # Create your models here.
 
@@ -16,15 +16,15 @@ class Listing(models.Model):
     def get_absolute_url(self):
         return reverse("listing-detail-page", kwargs={"slug": self.slug})
     
-# class Thread(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
-#     receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
+class Thread(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
+    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
 
-# class Message(models.Model):
-#     thread = models.ForeignKey(Thread, on_delete=models.CASCADE, related_name="+", blank=True, null=True)
-#     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
-#     receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
-#     body = models.CharField(max_length=1000)
-#     image = models.ImageField(upload_to="messages", blank=True, null=True)
-#     date = models.DateTimeField(default=timezone.now)
-#     is_read = models.BooleanField(default=False)
+class Message(models.Model):
+    thread = models.ForeignKey(Thread, on_delete=models.CASCADE, related_name="+", blank=True, null=True)
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
+    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
+    body = models.CharField(max_length=1000)
+    image = models.ImageField(upload_to="messages", blank=True, null=True)
+    date = models.DateTimeField(default=timezone.now)
+    is_read = models.BooleanField(default=False)
