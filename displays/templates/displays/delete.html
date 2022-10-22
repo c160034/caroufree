@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Delete
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "displays/forms.css"%}">
+{% endblock %}
+
+{% block content %}
+    <section id="form">
+        <h2>Delete: {{listing.title}}</h2>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <strong>Are you sure?!</strong><br/><br/>
+            <button>Delete</button>
+        </form>
+    </section>
+{% endblock %} 

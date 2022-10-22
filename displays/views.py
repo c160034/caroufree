@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import ListView, DetailView, View, UpdateView, CreateView
+from django.views.generic import ListView, DetailView, View, UpdateView, DeleteView
 from django.http import HttpResponseRedirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.template.defaultfilters import slugify
 import datetime
 from django.contrib import messages
@@ -54,6 +54,11 @@ class UpdateListingView(UpdateView):
     model = Listing
     fields = ['title', 'image', 'description']
     template_name = "displays/edit.html"
+
+class DeleteListingView(DeleteView):
+    model = Listing
+    template_name = "displays/delete.html"
+    success_url = reverse_lazy("listings-page")
 
 def register(request):
     if request.user.is_authenticated:

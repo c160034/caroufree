@@ -11,5 +11,6 @@ urlpatterns = [
     path("listings/new", views.NewListingView.as_view(), name="new-listing-page"),
     path("listings/<slug:slug>", views.SingleListingView.as_view(),
          name="listing-detail-page"),
-    path("listings/edit/<slug:slug>", views.UpdateListingView.as_view(), name='edit-listing-page')
+    path("listings/edit/<slug:slug>", views.UpdateListingView.as_view(), name='edit-listing-page'),
+    path("listings/<slug:slug>/delete", views.DeleteListingView.as_view(), name='delete-listing-page')
 ]
