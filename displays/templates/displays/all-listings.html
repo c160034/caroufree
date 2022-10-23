@@ -2,22 +2,25 @@
 {% load static %}
 
 {% block title %}
-    ALl Listings
+    All Listings
 {% endblock %}
 
 {% block css_files %}
     <link rel="stylesheet" href="{% static "displays/partials/listing.css"%}">
-    <link rel="stylesheet" href="{% static "displays/all-listings.css"%}">
+    {% comment %} <link rel="stylesheet" href="{% static "displays/all-listings.css"%}"> {% endcomment %}
 {% endblock %}
 
 {% block content %}
-<section id="all-listings">
-    <h2>All Listings</h2>
-
-    <ul>
+<div class="alert alert-info text-center">
+    All Listings
+</div>
+<div class="m-3">
+    <div class="row">
         {% for listing in listings %}
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 p-2">  
             {% include "displays/partials/listing.html" %}
+        </div>
         {% endfor %}
-    </ul>
-</section>
+    </div>
+</div>
 {% endblock %} 
