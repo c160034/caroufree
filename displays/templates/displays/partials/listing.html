@@ -1,13 +1,11 @@
-<li>
-    <article class="listing">
+    <div class="card">
+      <img src="{{ listing.image.url }}" class="card-img-top p-3" alt="{{ listing.title }}">
+      <div class="card-body px-1 py-0">
         <a href="{% url "listing-detail-page" listing.slug %}">
-            <img src="{{ listing.image.url }}" alt="{{ listing.title }}" />
-            <div class="listing__content">
-                <h3>{{ listing.title }}</h3>
-                <p>
-                    Posted on {{ listing.date }}
-                </p>
-            </div>
+            <h5 class="card-title text-center">{{ listing.title }}</h5>
         </a>
-    </article>
-</li>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">Posted on {{ listing.date }}</small>
+      </div>
+    </div>
