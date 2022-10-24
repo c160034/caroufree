@@ -10,25 +10,25 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 p-5">
-                <h3>Your Conversations</h3>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 p-5">
-                <form method="GET" action="{% url 'create-thread-page' %}">
-                    <button class="btn btn-light p-3" type="submit">Start a Conversation</button>
-                </form>
-            </div>
-        </div>
+    <div class="clearfix">
+        <form method="GET" action="{% url 'create-thread-page' %}">
+            <button class="btn btn-primary float-right m-2" type="submit">New Message</button>
+        </form>
+        <h3 class="alert-info text-left p-2 pl-4 m-0">Inbox</h3>
+    </div>
+    <div class="container mt-3 mx-auto">
         {% for thread in threads %}
-        <div class="row mb-3">
-            <div class="card col-md-12 p-5 shadow-sm">
-                <a class="stretch-link" href="{% url 'thread-page' thread.pk %}"><h5>{{ thread.user }} - {{ thread.receiver }}</h5></a>
-            </div>
-        </div>
+            <a href="{% url 'thread-page' thread.pk %}" style="text-decoration:none">
+                <div class="card" id="thread-card">
+                    <h5 class="m-3 text-dark">
+                        {% if request.user == thread.user %}
+                            {{ thread.receiver }}
+                        {% else %}
+                            {{ thread.user }} 
+                        {% endif %}
+                    </h5>
+                </div>
+            </a>
         {% endfor %}
     </div>
 {% endblock %} 
