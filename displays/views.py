@@ -69,7 +69,7 @@ def register(request):
         form = CreateUserForm()
         if request.method == 'POST':
             form = CreateUserForm(request.POST)
-            if form.is_valid():
+            if form.is_valid():  
                 form.save()
                 user = form.cleaned_data.get('username')
                 messages.success(request, 'Account was created for ' + user)
@@ -89,7 +89,7 @@ def loginPage(request):
                 login(request, user)
                 return redirect('/listings')
             else: 
-                messages.info(request,'Username OR password is incorrect')
+                messages.warning(request,'Username OR password is incorrect')
         
         context = {}
         return render(request, "displays/login.html", context)

@@ -7,14 +7,13 @@
 
 {% block css_files %}
     <link rel="stylesheet" href="{% static "displays/partials/listing.css"%}">
-    {% comment %} <link rel="stylesheet" href="{% static "displays/all-listings.css"%}"> {% endcomment %}
 {% endblock %}
 
 {% block content %}
-<div class="alert alert-info text-center">
+<h3 class="alert-info text-center p-2 m-0">
     All Listings
-</div>
-<div class="m-3">
+</h3>
+<div class="my-3 mx-4">
     <div class="row">
         {% for listing in listings %}
         <div class="col-6 col-sm-4 col-md-3 col-lg-2 p-2">  

@@ -24,6 +24,7 @@ class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username','email', 'password1','password2' ]
+    email = forms.EmailField(required=True)
 
 class ThreadForm(forms.Form):
     username = forms.CharField(label='', max_length=100)

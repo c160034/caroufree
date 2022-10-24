@@ -5,16 +5,12 @@
     Listing Title
 {% endblock %}
 
-{% block css_files %}
-    <link rel="stylesheet" href="{% static "displays/listing-detail.css"%}">
-{% endblock %}
-
 {% block content %}
 <div class="p-3">
     <p><a class="font-weight-light text-white" href="{% url "listings-page" %}">Back to all listings</a></p>
     <div class="card-group">
-        <div class="card col-lg-4 m-0">
-            <img class="card-img" src="{{ listing.image.url }}" style="aspect-ratio: 1/1; object-fit: contain;" alt="{{ listing.title }}" />
+        <div class="card col-lg-4 m-0 ">
+            <img class="card-img my-auto" src="{{ listing.image.url }}" style="aspect-ratio: 1/1; object-fit: contain;" alt="{{ listing.title }}" />
         </div>
         <div class="card col-lg-8">
             <div class="card-body">
