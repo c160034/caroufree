@@ -59,7 +59,7 @@ class UpdateListingView(UpdateView):
 
 class DeleteListingView(DeleteView):
     model = Listing
-    template_name = "displays/delete.html"
+    template_name = "displays/partials/delete.html"
     success_url = reverse_lazy("listings-page")
 
 def register(request):

@@ -1,4 +1,9 @@
-{% extends "base.html" %}
+<form action="{% url 'delete-listing-page' listing.slug %}" method="POST">
+    {% csrf_token %}
+    <button class="btn btn-danger">Delete</button>
+</form>
+
+{% comment %} {% extends "base.html" %}
 {% load static %}
 
 {% block title %}
@@ -19,4 +24,4 @@
         </form>
         <small><a href="{% url 'listing-detail-page' listing.slug %}">Cancel</a></small>
     </section>
-{% endblock %} 
+{% endblock %} {% endcomment %}
