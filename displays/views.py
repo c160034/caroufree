@@ -142,10 +142,12 @@ class ThreadView(View):
         form = MessageForm()
         thread = Thread.objects.get(pk=pk)
         messages = Message.objects.filter(thread__pk__contains=pk)
+        dates = messages.values_list("date__date", flat=True).distinct()
         context = {
             'thread': thread,
             'form': form,
-            'messages': messages
+            'messages': messages,
+            'dates': dates
         }
         return render(request, 'displays/thread.html', context)
 
@@ -161,7 +163,8 @@ class CreateMessage(View):
             thread = thread,
             sender = request.user,
             receiver = receiver,
-            body = request.POST.get('message')
+            body = request.POST.get('message'),
+            image = request.FILES.get('image')
         ) 
         message.save()
         return redirect('thread-page', pk=pk)

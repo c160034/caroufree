@@ -31,3 +31,4 @@ class ThreadForm(forms.Form):
 
 class MessageForm(forms.Form):
     message = forms.CharField(label='', max_length=100)
+    image = forms.FileField(required=False)
