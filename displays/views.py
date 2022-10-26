@@ -100,19 +100,27 @@ def logoutUser(request):
 
 class ListThreads(View):
     def get(self, request, *args, **kwargs):
-        threads = Thread.objects.filter(Q(user=request.user) | Q(receiver=request.user))
-        context = {
-            'threads': threads
-        }
-        return render(request, 'displays/inbox.html', context)
+        if request.user.is_authenticated:
+            threads = Thread.objects.filter(Q(user=request.user) | Q(receiver=request.user))
+            context = {
+                'threads': threads
+            }
+            return render(request, 'displays/inbox.html', context)
+        else: 
+            messages.warning(request,'You need to be logged in first!')
+            return redirect('login-page')
     
 class CreateThread(View):
     def get(self, request, *args, **kwargs):
-        form = ThreadForm()
-        context = {
-            'form': form
-        }
-        return render(request, 'displays/create-thread.html', context)
+        if request.user.is_authenticated:
+            form = ThreadForm()
+            context = {
+                'form': form
+            }
+            return render(request, 'displays/create-thread.html', context)
+        else: 
+            messages.warning(request,'You need to be logged in first!')
+            return redirect('login-page')
 
     def post(self, request, *args, **kwargs):
         form = ThreadForm(request.POST)
@@ -139,7 +147,7 @@ class CreateThread(View):
         # except Exception as e:
             # print(e)
         except:
-            return redirect('create-thread-page')
+                return redirect('login-page')
 
 class ThreadView(View):
     def get(self, request, pk, *args, **kwargs):
