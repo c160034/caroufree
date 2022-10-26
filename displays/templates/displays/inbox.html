@@ -22,10 +22,11 @@
                 <div class="card" id="thread-card">
                     <h5 class="m-3 text-dark">
                         {% if request.user == thread.user %}
-                            {{ thread.receiver }}
+                            {{ thread.receiver }} {% if thread.user_read is False %} <span class="text-info font-weight-bold">&#x2022;</span> {% endif %}
                         {% else %}
-                            {{ thread.user }} 
+                            {{ thread.user }} {% if thread.receiver_read is False %} <span class="text-info font-weight-bold">&#x2022;</span> {% endif %}
                         {% endif %}
+                        <small class="text-muted float-right"> last message on {{thread.date}} </small>
                     </h5>
                 </div>
             </a>

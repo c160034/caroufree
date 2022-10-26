@@ -106,7 +106,7 @@ class ListThreads(View):
                 notification = Notification.objects.filter(to_user=request.user).exclude(user_has_seen=True)[0]
                 notification.user_has_seen = True
                 notification.save()
-            threads = Thread.objects.filter(Q(user=request.user) | Q(receiver=request.user))
+            threads = Thread.objects.filter(Q(user=request.user) | Q(receiver=request.user)).order_by('-date')
             context = {
                 'threads': threads
             }
@@ -158,6 +158,11 @@ class ThreadView(View):
     def get(self, request, pk, *args, **kwargs):
         form = MessageForm()
         thread = Thread.objects.get(pk=pk)
+        if request.user == thread.user:
+            thread.user_read = True
+        else:
+            thread.receiver_read = True
+        thread.save()
         messages = Message.objects.filter(thread__pk__contains=pk)
         dates = messages.values_list("date__date", flat=True).distinct()
         context = {
@@ -173,9 +178,11 @@ class CreateMessage(View):
         thread = Thread.objects.get(pk=pk)
         if thread.receiver == request.user:
             receiver = thread.user
+            thread.user_read = False
         else:
             receiver = thread.receiver
-        
+            thread.receiver_read = False
+
         message = Message(
             thread = thread,
             sender = request.user,
@@ -184,6 +191,8 @@ class CreateMessage(View):
             image = request.FILES.get('image')
         ) 
         message.save()
+        thread.date=message.date
+        thread.save()
         print(Notification.objects.filter(to_user=receiver).exclude(user_has_seen=True))
         if Notification.objects.filter(to_user=receiver).exclude(user_has_seen=True).count() == 0:
             notification = Notification.objects.create(

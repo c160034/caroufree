@@ -19,6 +19,9 @@ class Listing(models.Model):
 class Thread(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
     receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
+    user_read = models.BooleanField(default=False)
+    receiver_read = models.BooleanField(default=False)
+    date = models.DateTimeField(default=timezone.now)
 
 class Message(models.Model):
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE, related_name="+", blank=True, null=True)

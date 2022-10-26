@@ -11,7 +11,7 @@ class ListingAdmin(admin.ModelAdmin):
 
 class ThreadAdmin(admin.ModelAdmin):
     list_filter = ("user", "receiver",)
-    list_display = ("user", "receiver",)
+    list_display = ("user", "receiver","date")
 
     
 class NotificationAdmin(admin.ModelAdmin):

@@ -15,9 +15,9 @@
             <div class="col-md-12 m-0 p-1 bg-white" id="head">
                 <a href="{% url 'inbox-page' %}"><button class="btn btn-primary float-left">Back to Inbox</button></a>
                 {% if thread.receiver == request.user %}
-                    <h5 class="text-center my-2" style="margin-right:120px">{{ thread.user }}</h5>
+                    <h5 class="text-center my-2 font-weight-bold" style="margin-right:120px">{{ thread.user }}</h5>
                 {% else %}
-                    <h5 class="text-center my-2" style="margin-right:120px">{{ thread.receiver }}</h5>
+                    <h5 class="text-center my-2 font-weight-bold" style="margin-right:120px">{{ thread.receiver }}</h5>
                 {% endif %}
             </div>
         </div>
