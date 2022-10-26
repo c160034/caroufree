@@ -15,7 +15,11 @@
         <div class="card col-lg-8">
             <div class="card-body">
                 <h3 class="card-title">{{ listing.title }}</h3>
-                <address>By <a href="{% url 'create-thread-page' %}">{{ listing.author.username }}</a></address>
+                <address>By 
+                    {% if request.user != listing.author %}<a href="{% url 'create-thread-page' %}">{% endif %}
+                    {{ listing.author.username }}
+                    {% if request.user != listing.author %}</a>{% endif %}
+                </address>
                 <h5>Description</h5>
                 <p class="card-text">
                     {{ listing.description }}

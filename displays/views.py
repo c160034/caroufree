@@ -119,19 +119,23 @@ class CreateThread(View):
         username = request.POST.get('username')
         try:
             receiver = User.objects.get(username=username)
-            if Thread.objects.filter(user=request.user, receiver=receiver).exists():
-                thread =  Thread.objects.filter(user=request.user, receiver=receiver)[0]
-                return redirect('thread-page', pk=thread.pk)
-            elif Thread.objects.filter(user=receiver, receiver=request.user).exists():
-                thread =  Thread.objects.filter(user=receiver, receiver=request.user)[0]
-                return redirect('thread-page', pk=thread.pk)  
-            if form.is_valid():
-                thread = Thread(
-                    user=request.user,
-                    receiver=receiver
-                )
-                thread.save()
-                return redirect('thread-page', pk=thread.pk)
+            if request.user != receiver:
+                if Thread.objects.filter(user=request.user, receiver=receiver).exists():
+                    thread =  Thread.objects.filter(user=request.user, receiver=receiver)[0]
+                    return redirect('thread-page', pk=thread.pk)
+                elif Thread.objects.filter(user=receiver, receiver=request.user).exists():
+                    thread =  Thread.objects.filter(user=receiver, receiver=request.user)[0]
+                    return redirect('thread-page', pk=thread.pk)  
+                if form.is_valid():
+                    thread = Thread(
+                        user=request.user,
+                        receiver=receiver
+                    )
+                    thread.save()
+                    return redirect('thread-page', pk=thread.pk)
+            else: 
+                messages.warning(request,'You cannot send message to yourself')
+                return redirect('create-thread-page')
         # except Exception as e:
             # print(e)
         except:
