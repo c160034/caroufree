@@ -15,11 +15,8 @@
         <div class="card col-lg-8">
             <div class="card-body">
                 <h3 class="card-title">{{ listing.title }}</h3>
-                <address>By 
-                    {% if request.user != listing.author %}<a href="{% url 'create-thread-page' %}">{% endif %}
-                    {{ listing.author.username }}
-                    {% if request.user != listing.author %}</a>{% endif %}
-                </address>
+                <address>By {{ listing.author.username }}</address>
+                
                 <h5>Description</h5>
                 <p class="card-text">
                     {{ listing.description }}
@@ -27,6 +24,12 @@
                 <p class="card-text"><small class="text-muted">
                     Posted on <time>{{ listing.date }}</time>
                 </small></p>
+                {% if request.user != listing.author %}
+                        <form method="POST" action="{% url 'create-thread-page' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="username" value={{listing.author.username}}> 
+                        <button class="btn btn-primary mb-3">Message {{ listing.author.username }}</button>
+                {% endif %}
                 {% if request.user == listing.author %}
                     <a href="{% url 'edit-listing-page' listing.slug %}"><button type="button" class="btn btn-info">Edit</button></a>
                     {% comment %} <small><a href="{% url 'delete-listing-page' listing.slug %}">Delete</a></small> {% endcomment %}
