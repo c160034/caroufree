@@ -28,3 +28,7 @@ class Message(models.Model):
     image = models.ImageField(upload_to="messages", blank=True, null=True)
     date = models.DateTimeField(default=timezone.now)
     is_read = models.BooleanField(default=False)
+
+class Notification(models.Model):
+    to_user = models.ForeignKey(User, related_name='notification_to', on_delete=models.CASCADE, null=True)
+    user_has_seen = models.BooleanField(default=False)

@@ -1,3 +1,4 @@
+from queue import Empty
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, View, UpdateView, DeleteView
 from django.http import HttpResponseRedirect
@@ -9,7 +10,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.db.models import Q
 from django.contrib.auth.models import User
 
-from .models import Listing, Thread, Message
+from .models import Listing, Thread, Message, Notification
 from .forms import ListingForm, CreateUserForm, ThreadForm, MessageForm
 
 
@@ -101,6 +102,10 @@ def logoutUser(request):
 class ListThreads(View):
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
+            if Notification.objects.filter(to_user=request.user).exclude(user_has_seen=True):
+                notification = Notification.objects.filter(to_user=request.user).exclude(user_has_seen=True)[0]
+                notification.user_has_seen = True
+                notification.save()
             threads = Thread.objects.filter(Q(user=request.user) | Q(receiver=request.user))
             context = {
                 'threads': threads
@@ -179,4 +184,10 @@ class CreateMessage(View):
             image = request.FILES.get('image')
         ) 
         message.save()
+        print(Notification.objects.filter(to_user=receiver).exclude(user_has_seen=True))
+        if Notification.objects.filter(to_user=receiver).exclude(user_has_seen=True).count() == 0:
+            notification = Notification.objects.create(
+                to_user=receiver,
+            )
+            notification.save()
         return redirect('thread-page', pk=pk)
