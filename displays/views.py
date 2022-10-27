@@ -106,7 +106,7 @@ class ListThreads(View):
                 notification = Notification.objects.filter(to_user=request.user).exclude(user_has_seen=True)[0]
                 notification.user_has_seen = True
                 notification.save()
-            threads = Thread.objects.filter(Q(user=request.user) | Q(receiver=request.user)).order_by('-date')
+            threads = Thread.objects.filter(Q(user=request.user) | Q(receiver=request.user)).exclude(messages__isnull=True).order_by('-date')
             context = {
                 'threads': threads
             }

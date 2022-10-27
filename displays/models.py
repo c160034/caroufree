@@ -24,7 +24,7 @@ class Thread(models.Model):
     date = models.DateTimeField(default=timezone.now)
 
 class Message(models.Model):
-    thread = models.ForeignKey(Thread, on_delete=models.CASCADE, related_name="+", blank=True, null=True)
+    thread = models.ForeignKey(Thread, on_delete=models.CASCADE, related_name="messages", blank=True, null=True)
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
     receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
     body = models.CharField(max_length=1000)
