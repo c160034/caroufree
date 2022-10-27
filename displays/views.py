@@ -171,7 +171,10 @@ class ThreadView(View):
             'messages': messages,
             'dates': dates
         }
-        return render(request, 'displays/thread.html', context)
+        if (request.user == thread.user) | (request.user == thread.receiver):
+            return render(request, 'displays/thread.html', context)
+        else:
+            return redirect('inbox-page')
 
 class CreateMessage(View):
     def post(self, request, pk, *args, **kwargs):
