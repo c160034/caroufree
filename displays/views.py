@@ -152,6 +152,7 @@ class CreateThread(View):
         # except Exception as e:
             # print(e)
         except:
+                messages.warning(request,'You need to be logged in first!')
                 return redirect('login-page')
 
 class ThreadView(View):
