@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    New Conversation
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "displays/thread.css"%}">
+{% endblock %}
+
+{% block content %}
+        <div class="col-md-12 m-0 p-1 bg-white" id="head">
+            <a href="{% url 'inbox-page' %}"><button class="btn btn-primary float-left">Back to Inbox</button></a>
+                <h5 class="text-center my-2" style="margin-right:120px">Start a Conversation!</h5>
+        </div>
+        <div class="card mx-auto" style="width: 480px; margin-top:100px">
+            <div class="card-body">
+                {% for message in messages %}
+                    <div class="alert {% if message.tags == "warning" %}alert-danger{% endif %}">
+                        {{message}}
+                    </div>
+                {% endfor %}
+                <form method="POST">
+                    {% csrf_token %}
+                    <p>Enter the recipient username</p>
+                    {{ form }}
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-success mt-3" type="submit">Continue</button>
+                    </div> 
+                </form>
+            </div>
+        </div>
+{% endblock %} 
+

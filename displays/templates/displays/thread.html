@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Conversation
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "displays/thread.css"%}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row mx-0">
+            <div class="col-md-12 m-0 p-1 bg-white" id="head">
+                <a href="{% url 'inbox-page' %}"><button class="btn btn-primary float-left">Back to Inbox</button></a>
+                {% if thread.receiver == request.user %}
+                    <h5 class="text-center my-2 font-weight-bold" style="margin-right:120px">{{ thread.user }}</h5>
+                {% else %}
+                    <h5 class="text-center my-2 font-weight-bold" style="margin-right:120px">{{ thread.receiver }}</h5>
+                {% endif %}
+            </div>
+        </div>
+        {% if messages.all.count == 0 %}
+            <div class="row my-5">
+                <div class="col-md-12"> 
+                    <p class="empty-text mt-3">No Messages</p>
+                </div>
+            </div> 
+        {% endif %}
+        <div id="messages">
+        {% for date in dates %}
+            <div>
+                <p class="text-center m-0 text-white">{{ date }}</p>
+            </div>
+            {% for message in messages %}
+                {% if message.date.date == date %}   
+                <div class="row ml-4">
+                    <div class="col-10">
+                        {% if message.sender == request.user %}
+                            <div class="sent-message mt-3">
+                                <p style="margin:0;">{{ message.body }}</p>
+                                {% if message.image %}
+                                <img class="card-img pb-1" style="max-width:300px" src="/files/{{ message.image }}">
+                                {% endif %}
+                            </div>
+                        {% elif message.receiver == request.user %}
+                            <div class="received-message mt-3" style="display:inline-block;">
+                                <p style="margin:0;">{{ message.body }}</p>
+                                {% if message.image %}
+                                <img class="card-img pb-1" style="max-width:300px" src="/files/{{ message.image }}">
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-2">
+                        <p class="mt-4 text-white text-center">{{ message.date.time }}</p>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+        </div>
+        <div class="row" id="type-area">
+            <div class="card col-md-12 mt-3 p-3 shadow-sm" id="send-message"> 
+                <form method="POST" action="{% url 'create-message-page' thread.pk %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for form_field in form %}
+                        <div class="form-group mb-0 mt-1" style="{% if form_field.label == "Image" %}display:inline-block;{% endif %}">
+                            <input class="form-control-file"{{ form_field }}
+                        </div>
+                    {% endfor %}
+                    <button class="btn btn-light" style="float: right;" type="submit">Send Message</button>
+                </form>
+            </div>
+        </div>         
+    </div>
+    <script src="/static/displays/scroll.js" type="text/javascript"></script>
+{% endblock %} 
+
+

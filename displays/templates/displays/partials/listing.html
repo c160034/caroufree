@@ -1,0 +1,11 @@
+    <div class="card">
+      <img src="{{ listing.image.url }}" class="card-img-top p-3" alt="{{ listing.title|truncatechars:50 }}">
+      <div class="card-body px-1 py-0">
+        <a href="{% url "listing-detail-page" listing.slug %}">
+            <h5 class="card-title text-center">{{ listing.title }}</h5>
+        </a>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">Posted on {{ listing.date }}</small>
+      </div>
+    </div>

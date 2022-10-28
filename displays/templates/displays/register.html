@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block content %}
+    <div class="card mx-auto mt-5" style="width: 480px;">
+        <div class="card-body">
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    <h2>Fail to register</h2>
+                    <p>Please check the form and update accordingly.</p>
+                </div>
+            {% endif %}
+            <h5>Register</h5>
+            <form action="" method="POST" novalidate>
+                {% csrf_token %}
+                {% for form_field in form %}
+                    <div class="form-group">
+                        {{ form_field.label_tag }}
+                        <input class="form-control"{{ form_field }}
+                        {% for error in form_field.errors %}
+                            <small class="text-danger">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+                <button class="btn btn-primary">Register</button>
+            </form>
+            <p class="form-text text-muted mb-0">Already have an account? <a href="/login">Login</a></p>
+        </div>
+    </div>
+{% endblock %} 
+
+{% comment %} {% if form_field.errors %} {% endcomment %}
