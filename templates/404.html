@@ -5,6 +5,9 @@
 {% endblock %}
 
 {% block content%}
-    <h2>We're sorry!</h2>
-    <p>But we couldn't find that page!</p>
+    <div class="text-white text-center mt-3">
+        <h2>We're sorry!</h2>
+        <p>But we couldn't find that page!</p>
+        <p>Redirect to <a class="link-primary" href="{% url "starting-page" %}">home</a></p>
+    </div>
 {% endblock %}
