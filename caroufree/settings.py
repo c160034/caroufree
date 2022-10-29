@@ -14,7 +14,6 @@ from pathlib import Path
 import cloudinary_storage
 from decouple import config
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -31,7 +30,6 @@ DEBUG = False
 ALLOWED_HOSTS = [
     'localhost', 
     'caroufree.herokuapp.com',
-    '*'
 ]
 
 
@@ -149,4 +147,4 @@ CLOUDINARY_STORAGE = {
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-# STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = BASE_DIR / "staticfiles"
