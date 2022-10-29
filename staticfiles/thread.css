@@ -1,0 +1,50 @@
+#head {
+    position: fixed;
+    top: 59px;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+#messages {
+    margin-top: 60px; 
+    margin-bottom: 110px;
+}
+
+#type-area {
+    position: fixed;
+    bottom: 0;
+    left: 15px;
+    width: 100%;
+}
+
+#thread-card:hover {
+    border-color: grey;
+    border-width: 1px;
+}
+
+.container {
+    min-width: 480px;
+}
+
+.empty-text {
+    color: #777;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.sent-message {
+    background-color: #f3f3f3;
+    border-radius: 30px;
+    padding: 10px 25px;
+    /* width: 75%; */
+    float: right;
+}
+
+.received-message {
+    background-color: rgb(1,196,255);
+    color: white;
+    border-radius: 30px;
+    padding: 10px 25px;
+    /* width: 75%; */
+}
