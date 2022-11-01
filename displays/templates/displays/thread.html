@@ -41,14 +41,14 @@
                             <div class="sent-message mt-3">
                                 <p style="margin:0;">{{ message.body }}</p>
                                 {% if message.image %}
-                                <img class="card-img pb-1" style="max-width:300px" src="/files/{{ message.image }}">
+                                <img class="card-img pb-1" style="max-width:300px" src="{{ message.image.url }}">
                                 {% endif %}
                             </div>
                         {% elif message.receiver == request.user %}
                             <div class="received-message mt-3" style="display:inline-block;">
                                 <p style="margin:0;">{{ message.body }}</p>
                                 {% if message.image %}
-                                <img class="card-img pb-1" style="max-width:300px" src="/files/{{ message.image }}">
+                                <img class="card-img pb-1" style="max-width:300px" src="{{ message.image.url }}">
                                 {% endif %}
                             </div>
                         {% endif %}
