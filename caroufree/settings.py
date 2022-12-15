@@ -29,7 +29,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     'localhost', 
-    'caroufree.herokuapp.com',
+    'caroufree.onrender.com',
 ]
 
 
