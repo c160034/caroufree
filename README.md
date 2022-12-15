@@ -2,7 +2,7 @@
 A small clone of [carousell](https://www.carousell.sg/), allowing users post listings to give and receive free items with a goal of promoting
 sustainability.
 
-Visit [HERE](https://caroufree.herokuapp.com/) !
+Visit [HERE](https://caroufree.onrender.com) !
 
 ### Built With
 * Python(Django) 
@@ -12,7 +12,7 @@ Visit [HERE](https://caroufree.herokuapp.com/) !
 * Bootstrap
 * SQLite
 * Cloudinary
-* Heroku
+* Render
 
 ### Key Features
 Apart from the usual CRUD functionality on the listings, here are some key features that this app could do.
